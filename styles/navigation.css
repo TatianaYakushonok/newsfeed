@@ -1,0 +1,23 @@
+.navigation {
+  grid-column: 5/-1;
+}
+
+.navigation__list {
+  display: flex;
+  gap: 60px;
+}
+
+.navigation__link {
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+}
+
+.navigation__link:hover {
+  color: var(--color-accent);
+}
+
+.navigation__link_active {
+  color: var(--color-accent);
+}

@@ -1,0 +1,39 @@
+.article {
+  padding: 75px 0 135px;
+}
+
+.article__big_column {
+  grid-column: span 9;
+}
+
+.article__small_column {
+  grid-column: 10/-1;
+}
+
+.article__category {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}
+
+.article__source,
+.article__date {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+.article__source {
+  color: var(--color-grey);
+}
+
+.article__date {
+  color: var(--color-accent);
+}
+
+.article__date + .article__source::before {
+  content: "\00B7\00A0";
+}

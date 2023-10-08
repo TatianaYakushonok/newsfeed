@@ -1,0 +1,20 @@
+.small-article {
+  padding-left: 11px;
+  border-left: 9px solid var(--color-primary);
+}
+
+.small-article:not(:last-child) {
+  margin-bottom: 35px;
+}
+
+.small-article__title {
+  margin-bottom: 14px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
