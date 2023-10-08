@@ -1,0 +1,54 @@
+/* rubik-regular - cyrillic_latin */
+@font-face {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/rubik-v28-cyrillic_latin-regular.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* rubik-500 - cyrillic_latin */
+@font-face {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/rubik-v28-cyrillic_latin-500.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* rubik-700 - cyrillic_latin */
+@font-face {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/rubik-v28-cyrillic_latin-700.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* rubik-900 - cyrillic_latin */
+@font-face {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../fonts/rubik-v28-cyrillic_latin-900.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  --color-primary: #262a2f;
+  --color-accent: #ff5533;
+  --color-gray: #868686;
+  --color-white: #fff;
+}
+
+* {
+  all: unset;
+  display: revert;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  background-color: #ebebeb;
+}
