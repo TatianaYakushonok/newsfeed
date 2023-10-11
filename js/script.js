@@ -1,10 +1,4 @@
-import { data } from "./data.js";
-
-const mainNews = data.items.slice(0, 3);
-const smallNews = data.items.slice(3, 12);
-
-const mainNewsContainer = document.querySelector(".article__big_column");
-const smallNewsContainer = document.querySelector(".article__small_column");
+let data = null;
 
 const escapeString = (str) => {
   const simbols = {
@@ -18,45 +12,59 @@ const escapeString = (str) => {
   });
 };
 
-mainNews.forEach((item) => {
-  const categoryData = data.categories.find((categoryItem) => categoryItem.id === item.category_id).name;
-  const sourceData = data.sources.find((sourceItem) => sourceItem.id === item.source_id).name;
+const renderNews = (categoryId) => {
+  fetch("http://frontend.karpovcourses.net/api/v2/ru/news/" + (categoryId ? categoryId : ""))
+    .then((response) => response.json())
+    .then((responseData) => {
+      data = responseData;
 
-  const template = document.createElement("template");
+      const mainNews = data.items.slice(0, 3);
+      const smallNews = data.items.slice(3, 12);
 
-  template.innerHTML = `
-    <article class="main-article">
-      <div class="main-article__image-container">
-        <img class="main-article__img" src="${encodeURI(item.image)}" alt="Фото новости">
-      </div>
+      const mainNewsContainer = document.querySelector(".article__big_column");
+      const smallNewsContainer = document.querySelector(".article__small_column");
 
-      <div class="main-article__content">
-        <span class="article__category main-article__category">${escapeString(categoryData)}</span>
-        <h2 class="main-article__title">${escapeString(item.title)}</h2>
-        <p class="main-article__text">${escapeString(item.description)}</p>
-        <span class="article__source main-article__source">${escapeString(sourceData)}</span>
-      </div>
-    </article>
-  `;
+      mainNews.forEach((item) => {
+        const categoryData = data.categories.find((categoryItem) => categoryItem.id === item.category_id).name;
+        const sourceData = data.sources.find((sourceItem) => sourceItem.id === item.source_id).name;
 
-  mainNewsContainer.append(template.content);
-});
+        const template = document.createElement("template");
 
-smallNews.forEach((item) => {
-  const dateData = new Date(item.date).toLocaleDateString("ru-RU", { month: "long", day: "numeric" });
-  const sourceData = data.sources.find((sourceItem) => sourceItem.id === item.source_id).name;
+        template.innerHTML = `
+          <article class="main-article">
+            <div class="main-article__image-container">
+              <img class="main-article__img" src="${encodeURI(item.image)}" alt="Фото новости">
+            </div>
+      
+            <div class="main-article__content">
+              <span class="article__category main-article__category">${escapeString(categoryData)}</span>
+              <h2 class="main-article__title">${escapeString(item.title)}</h2>
+              <p class="main-article__text">${escapeString(item.description)}</p>
+              <span class="article__source main-article__source">${escapeString(sourceData)}</span>
+            </div>
+          </article>
+        `;
 
-  const template = document.createElement("template");
+        mainNewsContainer.append(template.content);
+      });
 
-  template.innerHTML = `
-    <article class="small-article">
-      <h2 class="small-article__title">${escapeString(item.title)}</h2>
-      <p class="small-article__caption">
-        <span class="article__date small-article__date">${dateData}</span>
-        <span class="article__source small-article__source">${escapeString(sourceData)}</span>
-      </p>
-    </article>
-  `;
+      smallNews.forEach((item) => {
+        const dateData = new Date(item.date).toLocaleDateString("ru-RU", { month: "long", day: "numeric" });
+        const sourceData = data.sources.find((sourceItem) => sourceItem.id === item.source_id).name;
 
-  smallNewsContainer.append(template.content);
-});
+        const template = document.createElement("template");
+
+        template.innerHTML = `
+          <article class="small-article">
+            <h2 class="small-article__title">${escapeString(item.title)}</h2>
+            <p class="small-article__caption">
+              <span class="article__date small-article__date">${dateData}</span>
+              <span class="article__source small-article__source">${escapeString(sourceData)}</span>
+            </p>
+          </article>
+        `;
+
+        smallNewsContainer.append(template.content);
+      });
+    });
+};
